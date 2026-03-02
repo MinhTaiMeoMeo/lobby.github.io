@@ -1,186 +1,251 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Study Buddy – Trợ lý học tập cá nhân hóa</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --blue: #4A90E2;
-            --blue-light: #7BB3EE;
-            --blue-pale: #EBF3FD;
-            --orange: #FFA94D;
-            --orange-light: #FFD4A3;
-            --white: #FFFFFF;
-            --gray-50: #F8FAFC;
-            --gray-100: #F1F5F9;
-            --gray-200: #E2E8F0;
-            --gray-400: #94A3B8;
-            --gray-600: #475569;
-            --gray-800: #1E293B;
-            --text: #1A2332;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Study Buddy – Trợ lý học tập cá nhân hóa</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #4A90E2;
+  --blue-light: #7BB3EE;
+  --blue-pale: #EBF3FD;
+  --orange: #FFA94D;
+  --orange-light: #FFD4A3;
+  --white: #FFFFFF;
+  --gray-50: #F8FAFC;
+  --gray-100: #F1F5F9;
+  --gray-200: #E2E8F0;
+  --gray-400: #94A3B8;
+  --gray-600: #475569;
+  --gray-800: #1E293B;
+  --text: #1A2332;
+}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: 'DM Sans', sans-serif;
-            color: var(--text);
-            background: var(--white);
-            overflow-x: hidden;
-        }
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  background: var(--white);
+  overflow-x: hidden;
+}
 
-        h1, h2, h3, h4 { font-family: 'Nunito', sans-serif; }
+h1, h2, h3, h4 { font-family: 'Nunito', sans-serif; }
 
-        /* NAV */
-        nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            background: rgba(255,255,255,0.92);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(74,144,226,0.1);
-            padding: 0 5%;
-            height: 68px;
-            display: flex; align-items: center; justify-content: space-between;
-        }
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(74,144,226,0.1);
+  padding: 0 5%;
+  height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
+}
 
-        .logo {
-            display: flex; align-items: center; gap: 10px;
-            font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.2rem;
-            color: var(--blue); text-decoration: none;
-        }
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.2rem;
+  color: var(--blue); text-decoration: none;
+}
 
-        .logo-icon {
-            width: 38px; height: 38px; background: linear-gradient(135deg, var(--blue), #6BA8ED);
-            border-radius: 12px; display: flex; align-items: center; justify-content: center;
-            font-size: 1.1rem; box-shadow: 0 4px 12px rgba(74,144,226,0.3); color: white;
-        }
+.logo-icon {
+  width: 38px; height: 38px; background: linear-gradient(135deg, var(--blue), #6BA8ED);
+  border-radius: 12px; display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; box-shadow: 0 4px 12px rgba(74,144,226,0.3); color: white;
+}
 
-        .nav-links {
-            display: flex; align-items: center; gap: 24px; list-style: none;
-        }
+.nav-links {
+  display: flex; align-items: center; gap: 32px; list-style: none;
+}
 
-        .nav-links a {
-            text-decoration: none; color: var(--gray-600); font-weight: 500; font-size: 0.9rem;
-            transition: color 0.2s;
-        }
-        .nav-links a:hover { color: var(--blue); }
+.nav-links a {
+  text-decoration: none; color: var(--gray-600); font-weight: 500; font-size: 0.9rem;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--blue); }
 
-        /* Nút Chat trên Nav */
-        .btn-ai-nav {
-            display: flex; align-items: center; gap: 6px;
-            background: var(--blue-pale); color: var(--blue) !important;
-            padding: 8px 16px; border-radius: 100px;
-            font-weight: 700 !important; border: 1.5px solid rgba(74,144,226,0.2);
-            transition: all 0.3s;
-        }
-        .btn-ai-nav:hover { background: var(--blue); color: white !important; transform: translateY(-2px); }
+/* Nút AI trên Nav */
+.btn-ai-nav {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--blue-pale); color: var(--blue) !important;
+    padding: 8px 16px; border-radius: 100px;
+    font-weight: 700 !important; border: 1.5px solid rgba(74,144,226,0.1);
+    transition: all 0.3s;
+}
+.btn-ai-nav:hover { background: var(--blue); color: white !important; transform: translateY(-2px); }
 
-        .btn-login {
-            background: var(--blue); color: white !important;
-            padding: 8px 22px; border-radius: 100px;
-            font-weight: 600; transition: all 0.2s !important;
-            box-shadow: 0 4px 12px rgba(74,144,226,0.25);
-        }
+.btn-login {
+  background: var(--blue); color: white !important;
+  padding: 8px 22px; border-radius: 100px;
+  font-weight: 600; transition: all 0.2s !important;
+  box-shadow: 0 4px 12px rgba(74,144,226,0.25);
+}
+.btn-login:hover { background: #3a7fd0 !important; box-shadow: 0 6px 18px rgba(74,144,226,0.35) !important; transform: translateY(-1px); }
 
-        /* HERO */
-        .hero {
-            min-height: 100vh;
-            background: linear-gradient(160deg, #F0F7FF 0%, #EBF3FD 40%, #FFF8F3 100%);
-            display: flex; align-items: center;
-            padding: 100px 5% 60px;
-            position: relative; overflow: hidden;
-        }
+/* HERO */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #F0F7FF 0%, #EBF3FD 40%, #FFF8F3 100%);
+  display: flex; align-items: center;
+  padding: 100px 5% 60px;
+  position: relative; overflow: hidden;
+}
 
-        .hero-content {
-            flex: 1; max-width: 600px; position: relative; z-index: 2;
-            animation: fadeUp 0.8s ease both;
-        }
+.hero::before {
+  content: '';
+  position: absolute; top: -100px; right: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(74,144,226,0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float-blob 8s ease-in-out infinite;
+}
 
-        .hero h1 {
-            font-size: clamp(2.2rem, 5vw, 3.4rem);
-            font-weight: 900; line-height: 1.15;
-            color: var(--text); margin-bottom: 20px;
-        }
+.hero::after {
+  content: '';
+  position: absolute; bottom: -60px; left: -60px;
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, rgba(255,169,77,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float-blob 10s ease-in-out infinite reverse;
+}
 
-        .hero h1 .accent { color: var(--blue); }
-        .hero h1 .accent-orange { color: var(--orange); }
+@keyframes float-blob {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(20px, -20px) scale(1.05); }
+}
 
-        .hero-sub {
-            font-size: 1.1rem; color: var(--gray-600); line-height: 1.7;
-            margin-bottom: 40px; max-width: 480px;
-        }
+.hero-content {
+  flex: 1; max-width: 580px; position: relative; z-index: 2;
+  animation: fadeUp 0.8s ease both;
+}
 
-        .hero-cta {
-            display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
-        }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: white; border: 1.5px solid rgba(74,144,226,0.2);
+  padding: 8px 16px; border-radius: 100px;
+  font-size: 0.82rem; font-weight: 600; color: var(--blue);
+  margin-bottom: 28px;
+  box-shadow: 0 2px 12px rgba(74,144,226,0.1);
+}
 
-        /* Nút Chat AI Chính (Màu Cam) */
-        .btn-chat-ai {
-            background: linear-gradient(135deg, var(--orange), #FF8C42);
-            color: white; border: none; padding: 15px 32px;
-            border-radius: 100px; font-family: 'Nunito', sans-serif;
-            font-weight: 800; font-size: 1rem; cursor: pointer;
-            box-shadow: 0 8px 24px rgba(255, 169, 77, 0.35);
-            transition: all 0.3s; text-decoration: none; 
-            display: inline-flex; align-items: center; gap: 10px;
-        }
-        .btn-chat-ai:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(255, 169, 77, 0.45); filter: brightness(1.1); }
-        
-        .chat-icon-bg {
-            width: 28px; height: 28px; background: rgba(255,255,255,0.2);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-        }
+.hero-badge .dot {
+  width: 8px; height: 8px; background: #22C55E;
+  border-radius: 50%; animation: pulse 2s infinite;
+}
 
-        .btn-primary {
-            background: var(--blue); color: white; border: none; padding: 15px 32px;
-            border-radius: 100px; font-family: 'Nunito', sans-serif;
-            font-weight: 800; font-size: 1rem; cursor: pointer;
-            box-shadow: 0 8px 24px rgba(74,144,226,0.25);
-            transition: all 0.3s; text-decoration: none;
-        }
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.3); }
+}
 
-        .hero-visual {
-            flex: 1; display: flex; justify-content: center; align-items: center;
-            position: relative; z-index: 2;
-            animation: fadeUp 0.8s 0.2s ease both;
-        }
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 900; line-height: 1.15;
+  color: var(--text); margin-bottom: 20px;
+}
 
-        /* Chat Demo Card */
-        .chat-card {
-            background: white; border-radius: 28px;
-            box-shadow: 0 30px 80px rgba(74,144,226,0.18);
-            width: 340px; overflow: hidden;
-        }
+.hero h1 .accent { color: var(--blue); }
+.hero h1 .accent-orange { color: var(--orange); }
 
-        .chat-header {
-            background: linear-gradient(135deg, var(--blue), #6BA8ED);
-            padding: 18px 20px; display: flex; align-items: center; gap: 12px; color: white;
-        }
+.hero-sub {
+  font-size: 1.1rem; color: var(--gray-600); line-height: 1.7;
+  margin-bottom: 40px; max-width: 460px;
+}
 
-        /* Nút Nổi Floating Button */
-        .floating-chat {
-            position: fixed; bottom: 30px; right: 30px; z-index: 999;
-            width: 60px; height: 60px; background: var(--blue);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            color: white; font-size: 1.5rem; text-decoration: none;
-            box-shadow: 0 10px 30px rgba(74,144,226,0.4);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .floating-chat:hover { transform: scale(1.1) rotate(10deg); }
+.hero-cta {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+}
 
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+.btn-primary {
+  background: linear-gradient(135deg, var(--blue), #5B9FE8);
+  color: white; border: none; padding: 15px 32px;
+  border-radius: 100px; font-family: 'Nunito', sans-serif;
+  font-weight: 800; font-size: 1rem; cursor: pointer;
+  box-shadow: 0 8px 24px rgba(74,144,226,0.35);
+  transition: all 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(74,144,226,0.45); }
 
-        @media (max-width: 768px) {
-            .hero { flex-direction: column; text-align: center; padding-top: 120px; }
-            .hero-cta { justify-content: center; }
-            .nav-links { display: none; }
-        }
-    </style>
+/* Nút Chat AI Màu Cam trong Hero */
+.btn-ai-hero {
+    background: linear-gradient(135deg, var(--orange), #FF8C42);
+    color: white; border: none; padding: 14px 28px;
+    border-radius: 100px; font-family: 'Nunito', sans-serif;
+    font-weight: 800; font-size: 1rem; cursor: pointer;
+    box-shadow: 0 8px 24px rgba(255, 169, 77, 0.3);
+    transition: all 0.3s; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 10px;
+}
+.btn-ai-hero:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(255, 169, 77, 0.4); filter: brightness(1.05); }
+
+.hero-stats {
+  display: flex; gap: 32px; margin-top: 48px;
+}
+
+.stat-number {
+  font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.6rem;
+  color: var(--text); line-height: 1;
+}
+.stat-label { font-size: 0.82rem; color: var(--gray-400); margin-top: 2px; }
+
+.hero-visual {
+  flex: 1; display: flex; justify-content: center; align-items: center;
+  position: relative; z-index: 2;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+
+/* CHAT DEMO */
+.chat-card {
+  background: white;
+  border-radius: 28px;
+  box-shadow: 0 30px 80px rgba(74,144,226,0.18), 0 8px 24px rgba(0,0,0,0.06);
+  width: 340px; overflow: hidden;
+  position: relative;
+}
+
+.chat-header {
+  background: linear-gradient(135deg, var(--blue), #6BA8ED);
+  padding: 18px 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+
+.chat-avatar {
+  width: 42px; height: 42px; background: rgba(255,255,255,0.25);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; color: white;
+}
+
+.chat-header-info h4 { color: white; font-size: 0.95rem; font-weight: 700; }
+.chat-header-info p { color: rgba(255,255,255,0.8); font-size: 0.78rem; margin-top: 1px; }
+
+.chat-online {
+  margin-left: auto; display: flex; align-items: center; gap: 5px;
+  color: rgba(255,255,255,0.9); font-size: 0.78rem;
+}
+.chat-online-dot { width: 8px; height: 8px; background: #4ADE80; border-radius: 50%; }
+
+.chat-body { padding: 18px; background: #F8FBFF; min-height: 260px; }
+
+/* Floating Button CSS */
+.floating-ai {
+    position: fixed; bottom: 30px; right: 30px; z-index: 999;
+    width: 64px; height: 64px; background: var(--blue);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 1.6rem; text-decoration: none;
+    box-shadow: 0 10px 30px rgba(74,144,226,0.4);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.floating-ai:hover { transform: scale(1.1) rotate(10deg); background: #3a7fd0; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+</style>
 </head>
 <body>
 
@@ -192,9 +257,7 @@
         <ul class="nav-links">
             <li><a href="#features">Tính năng</a></li>
             <li><a href="#analytics">Phân tích</a></li>
-            <li><a href="https://minhtaimeomeo.github.io/aistudybuddy.github.io/" class="btn-ai-nav">
-                <i class="fas fa-robot"></i> Gia sư AI
-            </a></li>
+            <li><a href="https://minhtaimeomeo.github.io/aistudybuddy.github.io/" class="btn-ai-nav"><i class="fas fa-robot"></i> Gia sư AI</a></li>
             <li><a href="#" class="btn-login">Đăng nhập</a></li>
         </ul>
     </nav>
@@ -209,11 +272,10 @@
             <p class="hero-sub">Giải đáp mọi bài tập khó, phân tích lộ trình học tập và hỗ trợ ôn thi cá nhân hóa chỉ trong vài giây.</p>
             
             <div class="hero-cta">
-                <a href="https://minhtaimeomeo.github.io/aistudybuddy.github.io/" class="btn-chat-ai">
-                    <div class="chat-icon-bg"><i class="fas fa-comment-dots"></i></div>
-                    Trò chuyện với AI
-                </a>
                 <a href="#assessment" class="btn-primary">Bắt đầu học ngay</a>
+                <a href="https://minhtaimeomeo.github.io/aistudybuddy.github.io/" class="btn-ai-hero">
+                    <i class="fas fa-comment-dots"></i> Trò chuyện với AI
+                </a>
             </div>
 
             <div class="hero-stats">
@@ -232,24 +294,27 @@
             <div class="chat-card">
                 <div class="chat-header">
                     <div class="chat-avatar"><i class="fas fa-robot"></i></div>
-                    <div class="chat-info">
+                    <div class="chat-header-info">
                         <h4>Gia sư StudyBuddy</h4>
-                        <p style="font-size: 0.7rem; opacity: 0.8;">Đang trực tuyến</p>
+                        <p>Đang trực tuyến</p>
+                    </div>
+                    <div class="chat-online">
+                        <div class="chat-online-dot"></div>
                     </div>
                 </div>
-                <div style="padding: 20px; background: #f8fbff; height: 200px;">
-                    <div style="background: white; padding: 10px; border-radius: 12px; font-size: 0.8rem; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                        Chào bạn! Hôm nay mình có thể giúp gì cho bài tập Toán của bạn?
+                <div class="chat-body">
+                    <div class="msg bot">
+                        <div class="bubble bot">Chào bạn! Hôm nay mình có thể giúp gì cho bài tập của bạn?</div>
                     </div>
-                    <div style="background: var(--blue); color: white; padding: 10px; border-radius: 12px; font-size: 0.8rem; align-self: flex-end; margin-left: 40px;">
-                        Giải giúp mình phương trình bậc 2 này với...
+                    <div class="msg user">
+                        <div class="bubble user">Giải giúp mình phương trình này với...</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <a href="https://minhtaimeomeo.github.io/aistudybuddy.github.io/" class="floating-chat" title="Chat với AI ngay">
+    <a href="https://minhtaimeomeo.github.io/aistudybuddy.github.io/" class="floating-ai" title="Chat với AI">
         <i class="fas fa-robot"></i>
     </a>
 
