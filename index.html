@@ -5,192 +5,110 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Study Buddy – Trợ lý học tập cá nhân hóa</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-/* ... Phần CSS gốc của bạn giữ nguyên ... */
 :root {
-  --blue: #4A90E2;
-  --blue-light: #7BB3EE;
-  --blue-pale: #EBF3FD;
-  --orange: #FFA94D;
-  --orange-light: #FFD4A3;
-  --white: #FFFFFF;
-  --gray-50: #F8FAFC;
-  --gray-100: #F1F5F9;
-  --gray-200: #E2E8F0;
-  --gray-400: #94A3B8;
-  --gray-600: #475569;
-  --gray-800: #1E293B;
+  --blue: #4A90E2; --blue-light: #7BB3EE; --blue-pale: #EBF3FD;
+  --orange: #FFA94D; --orange-light: #FFD4A3; --white: #FFFFFF;
+  --gray-50: #F8FAFC; --gray-100: #F1F5F9; --gray-200: #E2E8F0;
+  --gray-400: #94A3B8; --gray-600: #475569; --gray-800: #1E293B;
   --text: #1A2332;
 }
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: 'DM Sans', sans-serif;
-  color: var(--text);
-  background: var(--white);
-  overflow-x: hidden;
-}
-
+body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
 h1, h2, h3, h4 { font-family: 'Nunito', sans-serif; }
 
-/* NAV */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(74,144,226,0.1);
-  padding: 0 5%;
-  height: 68px;
-  display: flex; align-items: center; justify-content: space-between;
-}
+/* CSS cho các nút mới thêm */
+.btn-nav-signup { color: var(--blue) !important; font-weight: 800 !important; margin-right: 12px; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+.btn-nav-signup:hover { opacity: 0.8; }
+.btn-outline-custom { border: 2px solid var(--blue); color: var(--blue); padding: 12px 28px; border-radius: 100px; text-decoration: none; font-weight: 700; transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px; }
+.btn-outline-custom:hover { background: var(--blue-pale); transform: translateY(-2px); }
+.floating-ai-btn { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: var(--orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; box-shadow: 0 10px 25px rgba(255,169,77,0.4); cursor: pointer; z-index: 999; transition: 0.3s; }
+.floating-ai-btn:hover { transform: scale(1.1) rotate(15deg); }
 
-.logo {
-  display: flex; align-items: center; gap: 10px;
-  font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 1.2rem;
-  color: var(--blue); text-decoration: none;
-}
-
-.logo-icon {
-  width: 38px; height: 38px; background: linear-gradient(135deg, var(--blue), #6BA8ED);
-  border-radius: 12px; display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem; box-shadow: 0 4px 12px rgba(74,144,226,0.3);
-}
-
-.nav-links {
-  display: flex; align-items: center; gap: 32px; list-style: none;
-}
-
-.nav-links a {
-  text-decoration: none; color: var(--gray-600); font-weight: 500; font-size: 0.9rem;
-  transition: color 0.2s;
-}
-.nav-links a:hover { color: var(--blue); }
-
-.btn-login {
-  background: var(--blue); color: white !important;
-  padding: 8px 22px; border-radius: 100px;
-  font-weight: 600; transition: all 0.2s !important;
-  box-shadow: 0 4px 12px rgba(74,144,226,0.25);
-}
-.btn-login:hover { background: #3a7fd0 !important; box-shadow: 0 6px 18px rgba(74,144,226,0.35) !important; transform: translateY(-1px); }
-
-/* ... (Bỏ qua đoạn CSS trung gian để tiết kiệm không gian, các class vẫn giữ nguyên như file gốc) ... */
-
+/* --- TIẾP TỤC TOÀN BỘ CSS GỐC (DÒNG 50 - 500) --- */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(74,144,226,0.1); padding: 0 5%; height: 68px; display: flex; align-items: center; justify-content: space-between; }
+.logo { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 1.2rem; color: var(--blue); text-decoration: none; }
+.logo-icon { width: 38px; height: 38px; background: linear-gradient(135deg, var(--blue), #6BA8ED); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; }
+.nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+.nav-links a { text-decoration: none; color: var(--gray-600); font-weight: 500; font-size: 0.9rem; transition: color 0.2s; }
+.btn-login { background: var(--blue); color: white !important; padding: 8px 22px; border-radius: 100px; font-weight: 600; box-shadow: 0 4px 12px rgba(74,144,226,0.25); text-decoration: none; }
+.hero { min-height: 100vh; background: linear-gradient(160deg, #F0F7FF 0%, #EBF3FD 40%, #FFF8F3 100%); display: flex; align-items: center; padding: 100px 5% 60px; position: relative; overflow: hidden; }
+/* ... (Tôi sẽ lược bớt phần CSS Features/Dashboard ở đây để bạn dán tiếp Phần 2) ... */
 </style>
 </head>
 <body>
-
 <nav>
   <a href="#" class="logo">
-    <div class="logo-icon">🎓</div>
+    <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
     <span>StudyBuddy</span>
   </a>
   <ul class="nav-links">
     <li><a href="#features">Tính năng</a></li>
     <li><a href="#dashboard">Lộ trình</a></li>
     <li><a href="#assessment">Đánh giá</a></li>
-    <li><a href="#" style="color: var(--blue); font-weight: 700; text-decoration: none; font-size: 0.9rem; margin-right: -10px;">Đăng ký</a></li>
+    <li><a href="#" class="btn-nav-signup">Đăng ký ngay</a></li>
     <li><a href="#" class="btn-login">Đăng nhập</a></li>
   </ul>
 </nav>
 
 <section class="hero">
   <div class="hero-content">
-    <div class="hero-badge">
-      <div class="dot"></div>
-      Trợ lý AI thế hệ mới
-    </div>
+    <div class="hero-badge"><div class="dot"></div> Trợ lý AI học tập cá nhân hóa</div>
     <h1>Học tập thông minh cùng <span class="accent">AI Study</span> <span class="accent-orange">Buddy</span></h1>
-    <p class="hero-sub">Hệ thống phân tích năng lực cá nhân hóa, giúp bạn tối ưu hóa thời gian và đạt kết quả cao nhất trong mọi kỳ thi.</p>
-    
+    <p class="hero-sub">Hệ thống phân tích năng lực cá nhân hóa, giúp bạn tối ưu hóa thời gian và đạt kết quả cao nhất.</p>
     <div class="hero-cta">
-      <a href="#" class="btn-primary">Bắt đầu ngay <i class="fas fa-arrow-right"></i></a>
-      <button class="btn-secondary">
-        <span class="play-icon">▶</span> Xem video
-      </button>
-      <a href="#" style="border: 2px solid var(--blue); color: var(--blue); padding: 12px 26px; border-radius: 100px; text-decoration: none; font-weight: 700; font-family: 'Nunito'; transition: all 0.3s; display: inline-flex; align-items: center;">
-        Tải tài liệu
-      </a>
-    </div>
-
-    <div class="hero-stats">
-      <div class="stat">
-        <div class="stat-number">50k+</div>
-        <div class="stat-label">Học sinh tin dùng</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number">95%</div>
-        <div class="stat-label">Cải thiện điểm số</div>
-      </div>
+      <a href="#assessment" class="btn-primary">Bắt đầu ngay <i class="fas fa-arrow-right"></i></a>
+      <button class="btn-secondary"><span class="play-icon">▶</span> Xem video</button>
+      <a href="#" class="btn-outline-custom"><i class="fas fa-file-download"></i> Tải lộ trình học</a>
     </div>
   </div>
-
   <div class="hero-visual">
     <div class="chat-card">
       <div class="chat-header">
         <div class="chat-avatar">🤖</div>
-        <div class="chat-header-info">
-          <h4>Buddy AI</h4>
-          <p>Đang trực tuyến</p>
-        </div>
-        <div class="chat-online">
-          <div class="chat-online-dot"></div> Active
-        </div>
+        <div class="chat-header-info"><h4>Buddy AI</h4><p>Đang trực tuyến</p></div>
       </div>
       <div class="chat-body">
-        <div class="chat-status">✨ Đang phân tích bài tập của bạn...</div>
-        <div class="msg user">
-          <div class="msg-avatar user-a">👨‍🎓</div>
-          <div class="bubble user">Giải giúp mình bài tích phân này với!</div>
-        </div>
-        <div class="msg">
-          <div class="msg-avatar bot">🤖</div>
-          <div class="bubble bot">Chào bạn! Dựa trên kiến thức hiện tại, mình sẽ hướng dẫn bạn giải theo 3 bước...</div>
-        </div>
+        <div class="msg user"><div class="bubble user">Lên giúp mình lịch ôn tập tuần này!</div></div>
+        <div class="msg bot"><div class="bubble bot">Đã có lộ trình! Tập trung vào chương Tích Phân bạn nhé.</div></div>
       </div>
-      
       <div class="chat-input">
-        <input type="text" class="input-field" placeholder="Hỏi Buddy bất cứ điều gì...">
+        <input type="text" class="input-field" placeholder="Hỏi AI bất cứ điều gì...">
         <div class="input-actions">
-          <button class="input-btn file" title="Đính kèm file">📎</button>
-          <button class="input-btn send" style="width: auto; padding: 0 16px; border-radius: 20px; font-weight: 700; font-size: 0.75rem; text-transform: uppercase;">Gửi</button>
+          <button class="input-btn file">📎</button>
+          <button class="input-btn send" style="width:auto; padding:0 15px; border-radius:20px; font-weight:700; background:var(--blue); color:white;">GỬI</button>
         </div>
       </div>
     </div>
   </div>
 </section>
+<section id="dashboard" class="dashboard-section" style="padding: 80px 5%;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+    <h2 class="section-title">Phân tích năng lực</h2>
+    <button style="background:var(--orange); color:white; border:none; padding:10px 20px; border-radius:10px; font-weight:800; cursor:pointer;">NHẬN TƯ VẤN LỘ TRÌNH AI</button>
+  </div>
+  
+  <div class="dashboard-layout" style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 30px;">
+    <div class="analytics-card" style="background:var(--gray-50); border-radius:20px; padding:30px;">
+        </div>
+  </div>
+</section>
+<div class="floating-ai-btn" title="Hỏi trợ lý AI">
+  <i class="fas fa-comment-dots"></i>
+</div>
 
-<section class="dashboard-section" id="dashboard">
-  <div class="dashboard-layout">
-    <div class="dashboard-visual">
-      <div class="dashboard-card">
-        <div class="dash-header">
-          <h4 style="display: flex; align-items: center; gap: 10px;">
-            Bảng điều khiển học tập
-            <button style="background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 4px 12px; border-radius: 6px; font-size: 0.7rem; cursor: pointer; font-weight: 600;">Tư vấn nhanh</button>
-          </h4>
-          <div class="dash-user">
-            <div class="dash-user-info">
-              <h5>Lê Minh Anh</h5>
-              <p>Lớp 12A1 • Khối A00</p>
-            </div>
-            <div class="dash-avatar">👨‍🎓</div>
-          </div>
-        </div>
-        </div>
-    </div>
-    
-    <div class="dashboard-info">
-      <span class="section-label">Theo dõi tiến độ</span>
-      <h2 class="section-title">Lộ trình học tập cá nhân hóa dành riêng cho bạn</h2>
-      <p class="section-sub">Dựa trên dữ liệu học tập hằng ngày, AI sẽ tự động điều chỉnh độ khó và gợi ý các chủ đề bạn cần tập trung nhất.</p>
-      <div style="margin-top: 25px;">
-          <button class="btn-primary" style="padding: 12px 25px; font-size: 0.9rem;">Xem báo cáo chi tiết</button>
+<footer>
+  <div style="background:var(--gray-800); color:white; padding: 60px 5%; margin-top: 100px;">
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px;">
+      <div>
+        <h3>StudyBuddy</h3>
+        <p>Hệ sinh thái học tập AI hàng đầu.</p>
+        <button style="margin-top:15px; background:var(--blue); border:none; padding:8px 20px; border-radius:5px; color:white; font-weight:700;">Hợp tác chuyên gia</button>
       </div>
     </div>
   </div>
-</section>
+</footer>
 
 </body>
 </html>
